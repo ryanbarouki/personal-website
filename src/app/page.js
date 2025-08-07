@@ -71,8 +71,15 @@ const Portfolio = () => {
       live: "https://mapl.life"
     },
     {
+      name: "TwoThirds",
+      description: "A social experiment? A game where players simultaneously select a real number between 0 and 100. The winner of the game is the player who select a number closest to 2/3 the average.",
+      tech: ["React", "JavaScript", "HTML", "CSS"],
+      github: "https://github.com/ryanbarouki/two-thirds",
+      live: "https://twothirds.app/"
+    },
+    {
       name: "lsgo",
-      description: "Like 'ls' but prettier and with more functionality. Written in Go.",
+      description: "It's 'ls' in Go (pronounced 'lesgoooo') but prettier and with more functionality.",
       tech: ["Go"],
       github: "https://github.com/ryanbarouki/lsgo",
     },
