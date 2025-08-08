@@ -71,6 +71,19 @@ const Portfolio = () => {
       live: "https://mapl.life"
     },
     {
+      name: "ForGitAboutIt",
+      description: "A git committer for the forgetful scientist. Winner of CompMotifs: Hack the Sciences Hackathon.",
+      tech: ["Python", "HTML", "CSS"],
+      github: "https://github.com/Jollywatt/auto-commit",
+    },
+    {
+      name: "Cerebrle",
+      description: "Brain games to stretch your mind!",
+      tech: ["React", "JavaScript", "HTML", "CSS"],
+      github: "https://github.com/ryanbarouki/cerebrle",
+      live: "https://cerebrle.netlify.app/"
+    },
+    {
       name: "TwoThirds",
       description: "A social experiment? A game where players simultaneously select a real number between 0 and 100. The winner of the game is the player who select a number closest to 2/3 the average.",
       tech: ["React", "JavaScript", "HTML", "CSS"],
