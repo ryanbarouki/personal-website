@@ -1,8 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Gruvbox Light */
+  --background: #fbf1c7;
+  --foreground: #3c3836;
+  --accent-yellow: #d79921;
+  --accent-orange: #d65d0e;
+  --accent-aqua: #689d6a;
+  --accent-blue: #458588;
+  --accent-red: #cc241d;
+  --accent-purple: #b16286;
+  --accent-green: #98971a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Gruvbox Dark */
+    --background: #282828;
+    --foreground: #ebdbb2;
+    --accent-yellow: #fabd2f;
+    --accent-orange: #fe8019;
+    --accent-aqua: #8ec07c;
+    --accent-blue: #83a598;
+    --accent-red: #fb4934;
+    --accent-purple: #d3869b;
+    --accent-green: #b8bb26;
+  }
 }
 
 @theme inline {
@@ -12,12 +35,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);

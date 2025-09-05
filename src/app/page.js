@@ -7,13 +7,16 @@ const Portfolio = () => {
   const [typedText, setTypedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
 
-  const fullText = "$ whoami";
+  const fullText = "$ whoami ";
 
   useEffect(() => {
     let i = 0;
     const typingInterval = setInterval(() => {
-      if (i < fullText.length) {
+      if (i < fullText.length - 1) {
         setTypedText(fullText.slice(0, i + 1));
+        i++;
+      } else if (i === fullText.length - 1) {
+        setTimeout(() => setTypedText(fullText), 200);
         i++;
       } else {
         clearInterval(typingInterval);
@@ -123,48 +126,47 @@ const Portfolio = () => {
   ];
 
   const skills = [
-    "Python", "C++", "C#", "Go", "Haskell", "JavaScript/TypeScript", "React/Next.js", "Node.js", 
+    "Python", "C++", "C#", "Go", "Haskell", "JavaScript", "React/Next.js", "Node.js", 
     "SQL", "Docker", "AWS", "Windows Security"
   ];
 
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono text-sm">
+  <div className="min-h-screen bg-[--background] text-[--foreground] font-mono text-sm flex flex-col justify-between">
       {/* Header */}
-      <header className="border-b border-gray-800 p-4">
-        <div className="max-w-4xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Terminal size={16} />
-            <span className="text-gray-500">~/portfolio</span>
-          </div>
-          <nav className="flex space-x-6">
-            {['about', 'projects', 'contact'].map((section) => (
-              <button
-                key={section}
-                onClick={() => setCurrentSection(section)}
-                className={`hover:text-green-300 transition-colors ${
-                  currentSection === section ? 'text-green-300' : 'text-gray-500'
-                }`}
-              >
-                ./{section}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </header>
+  <header className="border-b p-4" style={{ borderColor: 'var(--accent-yellow)' }}>
+    <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center">
+      <div className="flex items-center space-x-2 flex-shrink-0">
+        <Terminal size={16} />
+        <span style={{ color: 'var(--foreground)' }}>~/portfolio/{currentSection}</span>
+      </div>
+      <nav className="flex flex-row sm:flex-row mt-2 sm:mt-0 space-x-4 sm:space-x-6">
+        {['about', 'projects', 'contact'].map((section) => (
+          <button
+            key={section}
+            onClick={() => setCurrentSection(section)}
+            className="transition-colors whitespace-nowrap"
+            style={{ color: currentSection === section ? 'var(--accent-yellow)' : 'var(--foreground)' }}
+          >
+            {`/${section}`}
+          </button>
+        ))}
+      </nav>
+    </div>
+  </header>
 
-      <main className="max-w-4xl mx-auto p-8">
+  <main className="max-w-4xl mx-auto p-8 flex-1">
         {/* Terminal Prompt */}
         <div className="mb-12">
-          <div className="text-green-500">
+          <div style={{ color: 'var(--accent-yellow)' }}>
             {typedText}
             <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>
               _
             </span>
           </div>
           {typedText === fullText && (
-            <div className="mt-2 text-white animate-fade-in">
+            <div className="mt-2 animate-fade-in" style={{ color: 'var(--foreground)' }}>
               <div className="mb-2">Ryan Barouki</div>
-              <div className="text-gray-400 text-xs">
+              <div className="text-xs" style={{ color: 'var(--foreground)' }}>
                 Physics PhD • Climber • Coder
               </div>
             </div>
@@ -175,11 +177,11 @@ const Portfolio = () => {
         {currentSection === 'about' && (
           <section className="space-y-8 animate-fade-in">
             <div>
-              <h2 className="text-green-300 mb-4 flex items-center">
+              <h2 className="mb-4 flex items-center" style={{ color: 'var(--accent-yellow)' }}>
                 <Code size={16} className="mr-2" />
                 about.md
               </h2>
-              <div className="text-gray-300 leading-relaxed space-y-4">
+              <div className="leading-relaxed space-y-4" style={{ color: 'var(--foreground)' }}>
                 <p>
                   Welcome to my site! This is where I collect my various projects.
                 </p>
@@ -190,11 +192,11 @@ const Portfolio = () => {
             </div>
 
             <div>
-              <h3 className="text-green-300 mb-3">// skills</h3>
+              <h3 className="mb-3" style={{ color: 'var(--accent-orange)' }}>// skills</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {skills.map((skill, index) => (
-                  <div key={skill} className="text-gray-400 text-xs">
-                    <span className="text-green-500">[{index + 1}]</span> {skill}
+                  <div key={skill} className="text-xs" style={{ color: 'var(--foreground)' }}>
+                    <span style={{ color: 'var(--accent-aqua)' }}>[{index + 1}]</span> {skill}
                   </div>
                 ))}
               </div>
@@ -205,32 +207,32 @@ const Portfolio = () => {
         {/* Projects Section */}
         {currentSection === 'projects' && (
           <section className="animate-fade-in">
-            <h2 className="text-green-300 mb-6 flex items-center">
+            <h2 className="mb-6 flex items-center" style={{ color: 'var(--accent-yellow)' }}>
               <FileText size={16} className="mr-2" />
               projects.json
             </h2>
             <div className="space-y-6">
               {projects.map((project, index) => (
-                <div key={project.name} className="border border-gray-800 p-4 hover:border-gray-700 transition-colors">
+                <div key={project.name} className="border p-4 transition-colors" style={{ borderColor: 'var(--accent-yellow)' }}>
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-white font-semibold">{project.name}</h3>
+                    <h3 className="font-semibold" style={{ color: 'var(--foreground)' }}>{project.name}</h3>
                     <div className="flex space-x-3">
                       {project.github &&
-                      <a href={project.github} className="text-gray-500 hover:text-green-400 transition-colors">
+                      <a href={project.github} className="transition-colors" style={{ color: 'var(--foreground)' }}>
                         <Github size={16} />
                       </a>
                       }
                       {project.live &&
-                      <a href={project.live} className="text-gray-500 hover:text-green-400 transition-colors">
+                      <a href={project.live} className="transition-colors" style={{ color: 'var(--foreground)' }}>
                         <ExternalLink size={16} />
                       </a>
                       }
                     </div>
                   </div>
-                  <p className="text-gray-400 text-xs mb-3">{project.description}</p>
+                  <p className="text-xs mb-3" style={{ color: 'var(--foreground)' }}>{project.description}</p>
                   <div className="flex space-x-2">
                     {project.tech.map(tech => (
-                      <span key={tech} className="text-green-500 text-xs border border-green-900 px-2 py-1">
+                      <span key={tech} className="text-xs border px-2 py-1" style={{ color: 'var(--accent-aqua)', borderColor: 'var(--accent-aqua)' }}>
                         {tech}
                       </span>
                     ))}
@@ -244,35 +246,37 @@ const Portfolio = () => {
         {/* Contact Section */}
         {currentSection === 'contact' && (
           <section className="animate-fade-in">
-            <h2 className="text-green-300 mb-6 flex items-center">
+            <h2 className="mb-6 flex items-center" style={{ color: 'var(--accent-yellow)' }}>
               <Terminal size={16} className="mr-2" />
               contact.sh
             </h2>
             <div className="space-y-4">
-              <div className="text-gray-300">
-                <span className="text-green-500">#!/bin/bash</span>
+              <div>
+                <span style={{ color: 'var(--accent-orange)' }}>#!/bin/bash</span>
               </div>
-              <div className="text-gray-400 text-xs">
+              <div className="text-xs" style={{ color: 'var(--foreground)' }}>
                 # Feel free to reach out for collaboration or just to say hi
               </div>
               <div className="space-y-3 mt-6">
                 <a 
                   href="mailto:ryanbarouki@gmail.com" 
-                  className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors"
+                  className="flex items-center space-x-3 transition-colors"
+                  style={{ color: 'var(--foreground)' }}
                 >
                   <Mail size={16} />
                   <span>ryanbarouki@gmail.com</span>
                 </a>
                 <a 
                   href="https://github.com/ryanbarouki" 
-                  className="flex items-center space-x-3 text-gray-300 hover:text-green-400 transition-colors"
+                  className="flex items-center space-x-3 transition-colors"
+                  style={{ color: 'var(--foreground)' }}
                 >
                   <Github size={16} />
                   <span>github.com/ryanbarouki</span>
                 </a>
               </div>
-              <div className="mt-8 text-gray-500 text-xs">
-                <span className="text-green-500">$</span> echo "Thanks for stopping by!"
+              <div className="mt-8 text-xs" style={{ color: 'var(--foreground)' }}>
+                <span style={{ color: 'var(--accent-yellow)' }}>$</span> echo "Thanks for stopping by!"
               </div>
             </div>
           </section>
@@ -280,11 +284,14 @@ const Portfolio = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-800 p-4 mt-16">
-        <div className="max-w-4xl mx-auto text-center text-gray-600 text-xs">
-          <span className="text-green-500">$</span> MIT License • 2025
-        </div>
-      </footer>
+  <footer 
+    className="border-t p-4 w-full bg-[--background]"
+    style={{ borderColor: 'var(--accent-yellow)' }}
+  >
+    <div className="max-w-4xl mx-auto text-center text-xs" style={{ color: 'var(--foreground)' }}>
+      <span style={{ color: 'var(--accent-yellow)' }}>$</span> MIT License • 2025
+    </div>
+  </footer>
 
       <style jsx>{`
         @keyframes fade-in {
