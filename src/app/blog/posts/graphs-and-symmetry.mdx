@@ -1,0 +1,88 @@
+---
+title: 'Graphs and their symmetry'
+date: '2025-09-14'
+author: 'Ryan Barouki'
+excerpt: 'A pedagogical discussion of the automorphism groups of graphs, multigraphs and Feynman diagrams'
+tags: ['Physics', 'Graph Theory', 'Group Theory', 'Feynman Diagrams']
+---
+
+# What is a graph?
+
+After the success of Wordle, I was inspired to create my own daily guessing game with a geography twist. Thus, flagle.io was born!
+
+## The Concept
+
+The idea was simple: show players a flag, and they have to guess which country it belongs to. Like Wordle, there would be:
+- One puzzle per day
+- Limited attempts
+- A way to share results without spoilers
+
+## Technical Implementation
+
+### React Architecture
+
+I built flagle.io using React with a simple but effective architecture:
+
+```jsx
+const App = () => {
+  const [currentGuess, setCurrentGuess] = useState('');
+  const [guesses, setGuesses] = useState([]);
+  const [gameState, setGameState] = useState('playing');
+  
+  // Game logic here
+  
+  return (
+    <div className="app">
+      <Flag country={todaysFlag} />
+      <GuessInput onSubmit={handleGuess} />
+      <GuessHistory guesses={guesses} />
+    </div>
+  );
+};
+```
+
+### Data Management
+
+The biggest challenge was managing the country data:
+- Flag images for all countries
+- Country name variations (official vs common names)
+- Handling different spellings and languages
+
+### Daily Puzzle Logic
+
+Each day's puzzle is determined by a simple algorithm:
+```javascript
+const getDailyFlag = () => {
+  const today = new Date();
+  const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
+  const index = daysSinceEpoch % countries.length;
+  return countries[index];
+};
+```
+
+## Challenges Faced
+
+### 1. Flag Recognition Difficulty
+
+Some flags are incredibly similar (looking at you, Monaco and Indonesia!). I had to carefully curate the flag list to ensure fair gameplay.
+
+### 2. Mobile Responsiveness
+
+Making sure the game worked well on all devices was crucial, since many users play on their phones.
+
+### 3. Performance
+
+Loading hundreds of flag images efficiently required implementing lazy loading and image optimization.
+
+## Results
+
+The game quickly gained traction and now has thousands of daily players. It's been amazing to see people sharing their results and discussing geography!
+
+## Lessons Learned
+
+- Simple concepts often work best
+- User experience is everything
+- The geography community is incredibly passionate
+- Daily games create strong user habits
+
+Building flagle.io was an incredible experience that taught me a lot about web development, user experience, and the power of simple, engaging concepts.

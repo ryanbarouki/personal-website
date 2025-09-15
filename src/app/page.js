@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { Github, Mail, ExternalLink, Terminal, Code, FileText } from 'lucide-react';
+import Header from './components/Header';
 
 const Portfolio = () => {
   const [currentSection, setCurrentSection] = useState('about');
@@ -131,30 +132,10 @@ const Portfolio = () => {
   ];
 
   return (
-  <div className="min-h-screen bg-[--background] text-[--foreground] font-mono text-sm flex flex-col justify-between">
+    <div className="min-h-screen bg-[--background] text-[--foreground] font-mono text-sm flex flex-col justify-between">
       {/* Header */}
-  <header className="border-b p-4" style={{ borderColor: 'var(--accent-yellow)' }}>
-    <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center">
-      <div className="flex items-center space-x-2 flex-shrink-0">
-        <Terminal size={16} />
-        <span style={{ color: 'var(--foreground)' }}>~/portfolio/{currentSection}</span>
-      </div>
-      <nav className="flex flex-row sm:flex-row mt-2 sm:mt-0 space-x-4 sm:space-x-6">
-        {['about', 'projects', 'contact'].map((section) => (
-          <button
-            key={section}
-            onClick={() => setCurrentSection(section)}
-            className="transition-colors whitespace-nowrap"
-            style={{ color: currentSection === section ? 'var(--accent-yellow)' : 'var(--foreground)' }}
-          >
-            {`/${section}`}
-          </button>
-        ))}
-      </nav>
-    </div>
-  </header>
-
-  <main className="max-w-4xl mx-auto p-8 flex-1">
+      <Header currentSection={currentSection} setCurrentSection={setCurrentSection} />
+      <main className="max-w-4xl mx-auto p-8 flex-1">
         {/* Terminal Prompt */}
         <div className="mb-12">
           <div style={{ color: 'var(--accent-yellow)' }}>
