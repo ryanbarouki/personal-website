@@ -80,15 +80,28 @@ const Blog = () => {
               }}
             >
               <div className="flex items-start justify-between mb-3">
-                <h2 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>
-                  <Link 
-                    href={`/blog/${post.slug}`}
-                    className="transition-colors"
-                    style={{ color: 'var(--foreground)' }}
-                  >
-                    {post.title}
-                  </Link>
-                </h2>
+                <div className="flex items-center space-x-2">
+                  <h2 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>
+                    <Link 
+                      href={`/blog/${post.slug}`}
+                      className="transition-colors"
+                      style={{ color: 'var(--foreground)' }}
+                    >
+                      {post.title}
+                    </Link>
+                  </h2>
+                  {post.draft && process.env.NODE_ENV === 'development' && (
+                    <span 
+                      className="text-xs border px-2 py-1 ml-2" 
+                      style={{ 
+                        color: 'var(--accent-orange)', 
+                        borderColor: 'var(--accent-orange)' 
+                      }}
+                    >
+                      DRAFT
+                    </span>
+                  )}
+                </div>
                 <div className="flex items-center space-x-2 text-xs" style={{ color: 'var(--accent-aqua)' }}>
                   <Calendar size={12} />
                   <span>{new Date(post.date).toLocaleDateString()}</span>

@@ -29,6 +29,14 @@ export function getAllPosts() {
         slug,
         ...matterResult.data,
       };
+    })
+    .filter((post) => {
+      // Filter out draft posts in production
+      // In development, show all posts including drafts
+      if (process.env.NODE_ENV === 'production') {
+        return !post.draft;
+      }
+      return true;
     });
 
   // Sort posts by date
@@ -52,6 +60,11 @@ export function getPostBySlug(slug) {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
+  // Check if this is a draft post and we're in production
+  if (process.env.NODE_ENV === 'production' && matterResult.data.draft) {
+    return null;
+  }
+
   return {
     slug,
     content: matterResult.content,
@@ -68,9 +81,29 @@ export function getAllPostSlugs() {
   return fileNames
     .filter((fileName) => fileName.endsWith('.mdx'))
     .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, '');
+      
+      // Read the file to check if it's a draft
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const matterResult = matter(fileContents);
+      
+      return {
+        slug,
+        draft: matterResult.data.draft || false,
+      };
+    })
+    .filter((post) => {
+      // Filter out draft posts in production
+      if (process.env.NODE_ENV === 'production') {
+        return !post.draft;
+      }
+      return true;
+    })
+    .map((post) => {
       return {
         params: {
-          slug: fileName.replace(/\.mdx$/, ''),
+          slug: post.slug,
         },
       };
     });
