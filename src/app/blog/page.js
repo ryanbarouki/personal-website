@@ -70,74 +70,92 @@ const Blog = () => {
         </div>
 
         <div className="space-y-6">
-          {posts.map((post, index) => (
-            <article 
-              key={post.slug} 
-              className="border p-6 transition-colors hover:bg-opacity-50"
+          {posts.length === 0 ? (
+            <div 
+              className="border p-8 text-center"
               style={{ 
                 borderColor: 'var(--accent-yellow)',
                 backgroundColor: 'transparent'
               }}
             >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center space-x-2">
-                  <h2 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>
-                    <Link 
-                      href={`/blog/${post.slug}`}
-                      className="transition-colors"
-                      style={{ color: 'var(--foreground)' }}
-                    >
-                      {post.title}
-                    </Link>
-                  </h2>
-                  {post.draft && process.env.NODE_ENV === 'development' && (
+              <FileText size={48} className="mx-auto mb-4" style={{ color: 'var(--accent-aqua)' }} />
+              <h2 className="text-lg mb-2" style={{ color: 'var(--accent-yellow)' }}>
+                Nothing here yet!
+              </h2>
+              <p className="text-sm" style={{ color: 'var(--foreground)' }}>
+                No posts available at the moment. Check back soon!
+              </p>
+            </div>
+          ) : (
+            posts.map((post, index) => (
+              <article 
+                key={post.slug} 
+                className="border p-6 transition-colors hover:bg-opacity-50"
+                style={{ 
+                  borderColor: 'var(--accent-yellow)',
+                  backgroundColor: 'transparent'
+                }}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <h2 className="text-lg font-semibold" style={{ color: 'var(--foreground)' }}>
+                      <Link 
+                        href={`/blog/${post.slug}`}
+                        className="transition-colors"
+                        style={{ color: 'var(--foreground)' }}
+                      >
+                        {post.title}
+                      </Link>
+                    </h2>
+                    {post.draft && process.env.NODE_ENV === 'development' && (
+                      <span 
+                        className="text-xs border px-2 py-1 ml-2" 
+                        style={{ 
+                          color: 'var(--accent-orange)', 
+                          borderColor: 'var(--accent-orange)' 
+                        }}
+                      >
+                        DRAFT
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center space-x-2 text-xs" style={{ color: 'var(--accent-aqua)' }}>
+                    <Calendar size={12} />
+                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                  </div>
+                </div>
+                
+                <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--foreground)' }}>
+                  {post.excerpt}
+                </p>
+                
+                <div className="flex space-x-2">
+                  {post.tags.map(tag => (
                     <span 
-                      className="text-xs border px-2 py-1 ml-2" 
+                      key={tag} 
+                      className="text-xs border px-2 py-1" 
                       style={{ 
-                        color: 'var(--accent-orange)', 
-                        borderColor: 'var(--accent-orange)' 
+                        color: 'var(--accent-aqua)', 
+                        borderColor: 'var(--accent-aqua)' 
                       }}
                     >
-                      DRAFT
+                      {tag}
                     </span>
-                  )}
+                  ))}
                 </div>
-                <div className="flex items-center space-x-2 text-xs" style={{ color: 'var(--accent-aqua)' }}>
-                  <Calendar size={12} />
-                  <span>{new Date(post.date).toLocaleDateString()}</span>
-                </div>
-              </div>
-              
-              <p className="text-sm mb-4 leading-relaxed" style={{ color: 'var(--foreground)' }}>
-                {post.excerpt}
-              </p>
-              
-              <div className="flex space-x-2">
-                {post.tags.map(tag => (
-                  <span 
-                    key={tag} 
-                    className="text-xs border px-2 py-1" 
-                    style={{ 
-                      color: 'var(--accent-aqua)', 
-                      borderColor: 'var(--accent-aqua)' 
-                    }}
+                
+                <div className="mt-4">
+                  <Link 
+                    href={`/blog/${post.slug}`}
+                    className="text-xs transition-colors"
+                    style={{ color: 'var(--accent-orange)' }}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              
-              <div className="mt-4">
-                <Link 
-                  href={`/blog/${post.slug}`}
-                  className="text-xs transition-colors"
-                  style={{ color: 'var(--accent-orange)' }}
-                >
-                  Read more →
-                </Link>
-              </div>
-            </article>
-          ))}
+                    Read more →
+                  </Link>
+                </div>
+              </article>
+            ))
+          )}
         </div>
       </main>
 
