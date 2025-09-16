@@ -162,30 +162,39 @@ const Portfolio = () => {
                 <Code size={16} className="mr-2" />
                 about.md
               </h2>
-              <div className="leading-relaxed space-y-4" style={{ color: 'var(--foreground)' }}>
-                <p>
-                  Welcome to my site! This is where I collect my various projects.
-                </p>
-                <p>
-                  I'm currently finishing off my PhD in theoretical physics.
-                </p>
+              <div
+                className="leading-relaxed space-y-4"
+                style={{
+                  color: 'var(--foreground)',
+                  textAlign: 'justify',
+                  textJustify: 'inter-word',
+                  hyphens: 'auto',
+                  WebkitHyphens: 'auto',
+                }}
+              >
+                <p>Welcome to my site! It was about time I used this domain name.</p>
+                <p>I'm currently finishing off my PhD in theoretical physics at the University of Oxford along side which I've been writing
+                code for fun. My interests include machine learning, web development, and game development.
+                You can find some of my projects listed in ./projects.</p>
+                <p>I'm also starting to write a blog because I have found that writing is the best way to clarify ones thoughts
+                and gain a deep understanding of a subject.</p>
               </div>
             </div>
 
-            <div>
-              <h3 className="mb-3" style={{ color: 'var(--accent-orange)' }}>// skills</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {skills.map((skill, index) => (
-                  <div key={skill} className="text-xs" style={{ color: 'var(--foreground)' }}>
-                    <span style={{ color: 'var(--accent-aqua)' }}>[{index + 1}]</span> {skill}
-                  </div>
-                ))}
+              <div>
+                <h3 className="mb-3" style={{ color: 'var(--accent-orange)' }}>// skills</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {skills.map((skill, index) => (
+              <div key={skill} className="text-xs" style={{ color: 'var(--foreground)' }}>
+                <span style={{ color: 'var(--accent-aqua)' }}>[{index + 1}]</span> {skill}
               </div>
-            </div>
-          </section>
-        )}
+            ))}
+                </div>
+              </div>
+            </section>
+          )}
 
-        {/* Projects Section */}
+          {/* Projects Section */}
         {currentSection === 'projects' && (
           <section className="animate-fade-in">
             <h2 className="mb-6 flex items-center" style={{ color: 'var(--accent-yellow)' }}>

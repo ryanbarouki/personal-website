@@ -36,11 +36,26 @@ const Blog = () => {
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center space-x-2 transition-colors" style={{ color: 'var(--foreground)' }}>
-              <ArrowLeft size={16} />
               <Terminal size={16} />
-              <span>~/blog</span>
+              <span style={{ color: 'var(--accent-orange)' }}>~/blog</span>
             </Link>
           </div>
+          <nav className="flex flex-row sm:flex-row mt-2 sm:mt-0 space-x-4 sm:space-x-6">
+            <Link
+              href="/"
+              className="transition-colors whitespace-nowrap"
+              style={{ color: 'var(--foreground)' }}
+            >
+              ~/portfolio
+            </Link>
+            <Link
+              href="/blog"
+              className="transition-colors whitespace-nowrap"
+              style={{ color: 'var(--accent-yellow)' }}
+            >
+              ~/blog
+            </Link>
+          </nav>
         </div>
       </header>
 
